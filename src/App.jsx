@@ -1,15 +1,14 @@
 import { useEffect, useState } from 'react';
 import { db } from './firebaseSimizu';
 import {
-  collection,
-  addDoc,
-  deleteDoc,
-  doc,
-  updateDoc,
-  onSnapshot,
-  query,
-  orderBy,
+  collection, addDoc, deleteDoc, doc,
+  updateDoc, onSnapshot, query, orderBy
 } from 'firebase/firestore';
+
+import Sidebar from './components/Sidebar';
+import Editor from './components/Editor';
+import ButtonRow from './components/ButtonRow';
+import Output from './components/Output';
 import './App.css';
 
 function App() {
@@ -115,56 +114,24 @@ function App() {
 
   return (
     <div className="app-layout">
-      <div className="sidebar">
-        <h2>保存プログラム</h2>
-        <ul>
-          {programs.map(prog => (
-            <li key={prog.id}>
-              {editingId === prog.id ? (
-                <input
-                  value={editTitle}
-                  onChange={(e) => setEditTitle(e.target.value)}
-                  onBlur={() => finishEditing(prog.id)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') finishEditing(prog.id);
-                  }}
-                  autoFocus
-                />
-              ) : (
-                <span
-                  onClick={() => handleSelect(prog)}
-                  onDoubleClick={() => startEditing(prog)}
-                  style={{
-                    cursor: 'pointer',
-                    fontWeight: prog.id === selectedProgramId ? 'bold' : 'normal'
-                  }}
-                >
-                  {prog.title}
-                </span>
-              )}
-            </li>
-          ))}
-        </ul>
-        <div className="sidebar-row">
-          <button className="sidebar-button" onClick={handleNew}>＋ 新規作成</button>
-          <button className="sidebar-button" onClick={handleDelete}>🗑️ 削除</button>
-        </div>
-      </div>
-
+      <Sidebar
+        programs={programs}
+        selectedProgramId={selectedProgramId}
+        editingId={editingId}
+        editTitle={editTitle}
+        onSelect={handleSelect}
+        onEditStart={startEditing}
+        onEditFinish={finishEditing}
+        onNew={handleNew}
+        onDelete={handleDelete}
+        setEditTitle={setEditTitle}
+      />
       <div className="main-content">
         <h1>プログラムエディタ</h1>
-        <textarea
-          className="code-input"
-          placeholder="JavaScriptコードをここに記述"
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
-        />
-        <div className="button-row">
-          <button className="action-button" onClick={handleSave}>💾 保存</button>
-          <button className="action-button" onClick={handleRun}>▶ 実行</button>
-        </div>
+        <Editor code={code} onChange={setCode} />
+        <ButtonRow onSave={handleSave} onRun={handleRun} />
         <h2>出力</h2>
-        <pre className="result">{result || 'ここに実行結果を表示'}</pre>
+        <Output result={result} />
       </div>
     </div>
   );
