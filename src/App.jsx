@@ -128,8 +128,9 @@ function App() {
       />
       <div className="main-content">
         <h1>プログラムエディタ</h1>
-        <Editor code={code} onChange={setCode} />
         <ButtonRow onSave={handleSave} onRun={handleRun} />
+        <Editor code={code} onChange={setCode} />
+        
         <h2>出力</h2>
         <Output result={result} />
       </div>
