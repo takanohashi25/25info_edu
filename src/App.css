@@ -1,0 +1,91 @@
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #2a2a2a;
+  color: white;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.sidebar li {
+  margin-bottom: 0.5rem;
+}
+
+.sidebar-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.sidebar-button {
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 1em;
+  background-color: #444;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.sidebar-button:hover {
+  background-color: #555;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.code-input {
+  width: 100%;
+  height: 30vh;
+  font-family: monospace;
+  font-size: 1em;
+  box-sizing: border-box;
+  resize: vertical;
+  margin-bottom: 1em;
+}
+
+.button-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.action-button {
+  padding: 0.5rem 1rem;
+  font-size: 1em;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.action-button:hover {
+  background-color: #1565c0;
+}
+
+.result {
+  background-color: #f0f0f0;
+  color: #000;
+  padding: 1em;
+  height: 20vh;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  border: 1px solid #ccc;
+  margin-top: 1rem;
+}
